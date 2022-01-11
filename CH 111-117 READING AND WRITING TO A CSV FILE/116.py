@@ -8,7 +8,7 @@ Write the data back to the original .csv file, overwriting the
 existing data with the amended data.
 """
 # IMPORTING DATA INTO A LIST
-#import csv
+# import csv
 import csv
 
 # open csv file
@@ -25,8 +25,7 @@ print("The following are book items within my repository")
 for index, row in enumerate(rows):
     print(f"{index}. {row}")
 
-
-#DELETE ROW
+# DELETE ROW
 
 # abstract the index of the row to be deleted
 userRow = int(input("\nwhich row do you want to delete?: "))
@@ -39,7 +38,6 @@ print("\nThe following are the remaining book items within my repository")
 for index, row in enumerate(rows):
     print(f"{index}. {row}")
 
-
 # DATA CHANGE
 
 # ask for the row they want to change and display that row
@@ -50,7 +48,7 @@ print(rows[userRowChange])
 userColumnChange = int(input("\nwhich column do you want to change?: "))
 
 # ask the new value
-value = input("Input the new value")
+value = input("Input the new value: ")
 
 # change the value
 rows[userRowChange][userColumnChange] = value
@@ -62,17 +60,26 @@ print("\nThis the new data list")
 for index, row in enumerate(rows):
     print(f"{index}. {row}")
 
-
 # OVERRIDE THE NEW CHANGES TO THE EXISTING CSV FILE
 
+# create a temporary 2d list
+# to freeze the changes made already
+tmp = []
 
-#tmp file of the new csv file
-#create a temporary file
-tmp = open("books.tmp" ,"w" )
-# row is a single row
-# rows is the 2d list abstracted
 for row in rows:
-    data = str(row[0] + "," + row[1] + "," + row[2] + "\n")
-    tmp.write(data)
+    tmp.append(row)
+print("\nOur new temporary list")
+print(tmp)
 
-file = open("Books.csv", )
+# opening the original csv file
+file = open("Books.csv", "w")
+# the w option allows us to override the csv file
+# break 2d list to rows
+
+for row in tmp:
+    # do you know the number of columns present
+    data = str(row[0] + "," + row[1] + "," + row[2] + "\n")
+    # remember to convert the variable to string
+    file.write(data)
+
+file.close()
