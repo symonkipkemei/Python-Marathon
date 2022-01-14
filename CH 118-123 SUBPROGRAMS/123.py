@@ -36,24 +36,23 @@ def read_csv():
 def delete_csv():
     import csv
     file = open("Salaries.csv", "r")
-    # convert csv to an iterable
-    reader = csv.reader(file)
-    # convert iterable a 2d list
-    myList = list(reader)
+    tmp = []
+
+    # save data to a temporary list
+    for row in file:
+        tmp.append(row)
+    print(tmp)
+    for index, row in enumerate(tmp):
+        print(index, row)
 
     # delete item form the list
-
     indexInput = int(input("insert the index of the record you want deleted: "))
-    del myList[indexInput]
-
-    #save data to a temporary list
-    tmp = myList
+    del tmp[indexInput]
 
     file = open("Salaries.csv", "w")
     # convert list to a csv file
     for row in tmp:
-        data = str(row[0]) + "," + (row[1]) + "\n"
-        file.write(data)
+        file.write(row)
 
     file.close()
 
@@ -78,6 +77,5 @@ def main():
 
         else:
             print("Incorrect input")
-
 
 main()
