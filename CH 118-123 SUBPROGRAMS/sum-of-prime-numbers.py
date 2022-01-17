@@ -47,6 +47,4 @@ def main():
     print(f"\nThe total sum of prime numbers is {sumPrime}")
 
 
-
-
 main()
