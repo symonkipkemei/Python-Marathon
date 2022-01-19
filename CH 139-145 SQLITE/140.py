@@ -28,11 +28,12 @@ they select 5.
 
 import sqlite3
 
+with sqlite3.connect("PhoneBook1.db") as db:
+    cursor = db.cursor()
+
 
 def read():
     """viewing all items on database"""
-    db = sqlite3.connect("PhoneBook1.db")
-    cursor = db.cursor()
     cursor.execute("""SELECT * FROM Names""")
     for row in cursor.fetchall():
         print(row)
@@ -40,8 +41,6 @@ def read():
 
 def add_to_phonebook():
     """ Adding to the phonebook"""
-    db = sqlite3.connect("PhoneBook1.db")
-    cursor = db.cursor()
     count = 0
     cursor.execute("""SELECT * FROM Names""")
     for x in cursor.fetchall():
@@ -54,14 +53,10 @@ def add_to_phonebook():
     cursor.execute(""" INSERT INTO Names(ID,FirstName,Surname,PhoneNumber) VALUES (?,?,?,?)""",
                    (ID, firstName, surname, phoneNumber))
     db.commit()
-    db.close()
 
 
 def read_surname():
     """ Read selected surname"""
-    db = sqlite3.connect("PhoneBook1.db")
-    cursor = db.cursor()
-
     surname = input("Insert surname:")
     cursor.execute(""" SELECT * FROM Names WHERE Surname =? """, [surname])
     for x in cursor.fetchall():
@@ -70,12 +65,9 @@ def read_surname():
 
 def delete():
     """ Delete selected item when id is inserted"""
-    db = sqlite3.connect("PhoneBook1.db")
-    cursor = db.cursor()
     ID = input("enter ID:")
     cursor.execute(""" DELETE FROM Names WHERE ID=?""", [ID])
     db.commit()
-
 
 
 def main():
@@ -110,3 +102,4 @@ def main():
 
 
 main()
+
