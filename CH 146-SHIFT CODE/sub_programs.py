@@ -13,7 +13,8 @@ def shift():
 def alphabet_data():
     """ the standard alphabet"""
     # The alphabet should extend beyond z so that alphabets loop beyond it
-    alphabet = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz ,'. ,'. ,'. ,'. ,'. ,'."
+    alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u",
+                "v", "w", "x", "y", "z", " "]
     return alphabet
 
 
@@ -25,6 +26,11 @@ def coder(userWord, gear, alphabet):
         originalPosition = alphabet.index(y)
         # establish the new position
         newPosition = originalPosition + gear
+
+        # the artificial loop
+        if newPosition > 26:
+            newPosition = newPosition - 27
+
         # determine the new alphabet derived from the new position
         newWord = alphabet[newPosition]
         # (concatenate) new word to an empty string
@@ -44,10 +50,13 @@ def decoder(codedWord, gear, alphabet):
         codedPosition = alphabet.index(x)
         # determine the original position
         originalPosition = codedPosition - gear
+
+        # the artificial loop
+        if originalPosition < 0:
+            originalPosition = originalPosition + 27
         # determine the original word
         originalWord = alphabet[originalPosition]
         # originalSentence
         originalSentence += originalWord
 
     print(f"The decoded message is \n{originalSentence}")
-
