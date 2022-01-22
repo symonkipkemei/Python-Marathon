@@ -25,7 +25,9 @@ def userColors(colorList):
     for index, x in enumerate(colorList):
         print((index + 1), x)
 
-    print("\nSelect 4 colors from above")
+    print("\nThe computer has selected 4 colors already\n"
+          "Let's see if you can guess them correctly\n"
+          "all the best!")
 
     for index, x in enumerate(range(0, 4)):
         correct = True
@@ -47,9 +49,13 @@ def checker(compchoice, userchoice):
 
     # colors they got right
     correct = 0
-    for y in userchoice:
-        if y in compchoice:
-            correct += 1
+    # loop through user selected colors
+    for x in userchoice:
+        # loop through computer colors
+        for z in compchoice:
+            # if use color is equal to comp choice
+            if x == z:
+                correct = correct + 1
 
     # colours they got right in the correct position
     correct_position = 0
@@ -64,6 +70,7 @@ def checker(compchoice, userchoice):
 
     print(f"You got {correct_position} in correct position\n"
           f"and {wrong_position} correct in wrong position")
+    return correct_position
 
 
 
