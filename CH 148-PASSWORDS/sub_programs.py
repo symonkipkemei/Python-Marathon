@@ -1,31 +1,40 @@
 # Go-getter
 
+import csv
+
+
 def user_identification():
     """Get user ID """
     global user_id
     # USER_ID
-    user_id_list = []
     correct = True
     while correct:
         user_id = input("Insert User ID:")
-        if user_id in user_id_list:
-            print("user id has been taken.Try another one")
+        with open("user_data.csv", "r") as f:
+            iterable = csv.reader(f)
+            dd_list = list(iterable)
+            loop = 0
+            # manufactured loop
+            for row in dd_list:
+                if user_id in row:
+                    loop += 1
 
-        else:
-            user_id_list.append(user_id)
-            correct = False
+            if loop != 0:
+                print("user id has been taken.Try another one")
+            else:
+                correct = False
     return user_id
 
 
 def user_password():
     """ Get user password"""
     global password
-
     # PASSWORD
     correct_password = True
     while correct_password:
         password = input("Insert password: ")
         count = 0
+
         # condition 1-8 characters
         if len(password) >= 8:
             count += 1
@@ -35,67 +44,49 @@ def user_password():
             print(f"password less than 8, count {count}")
 
         # condition 2- uppercase letters
-        correct = True
-        while correct:
-            loop = 0
-            for letter in password:
-                if letter.isupper():
-                    loop += 1
+        loop = 0
+        for letter in password:
+            if letter.isupper():
+                loop += 1
 
-            if loop != 0:
-                count += 1
-                print(f"uppercase letters, count {count}")
-            else:
-                print(f"uppercase letters, count {count}")
-
-            correct = False
+        if loop != 0:
+            count += 1
+            print(f"uppercase letters, count {count}")
+        else:
+            print(f"uppercase letters, count {count}")
 
         # condition 3- lowercase letters
-
-        correct = True
-        while correct:
-            loop = 0
-            for letter in password:
-                if letter.islower():
-                    loop += 1
-            if loop != 0:
-                count += 1
-                print(f"lowercase letters, count {count}")
-            else:
-                print(f"lowercase letters, count {count}")
-            correct = False
+        loop = 0
+        for letter in password:
+            if letter.islower():
+                loop += 1
+        if loop != 0:
+            count += 1
+            print(f"lowercase letters, count {count}")
+        else:
+            print(f"lowercase letters, count {count}")
 
         # condition 4- include numbers
-
-        while correct:
-            loop = 0
-            for letter in password:
-                if letter.isdigit():
-                    loop += 1
-
-            if loop != 0:
-                count += 1
-                print(f"includes numbers, count {count}")
-            else:
-                print(f"includes numbers, count {count}")
-
-            correct = False
+        loop = 0
+        for letter in password:
+            if letter.isdigit():
+                loop += 1
+        if loop != 0:
+            count += 1
+            print(f"includes numbers, count {count}")
+        else:
+            print(f"includes numbers, count {count}")
 
         # condition 5- include  special characters
-        while correct:
-            loop = 0
-            special_characters = ["!", "£", "$", "%", "&", "<", "*", "@"]
-            list_password = list(password)
-            print(list_password)
-            for letter in list_password:
-                if letter in special_characters:
-                    loop += 1
-            if loop != 0:
-                count += 1
-                print(f"includes special characters, count {count}")
-                count += 1
-
-            correct = False
+        loop = 0
+        special_characters = ["!", "£", "$", "%", "&", "<", "*", "@"]
+        list_password = list(password)
+        for letter in list_password:
+            if letter in special_characters:
+                loop += 1
+        if loop != 0:
+            count += 1
+            print(f"includes special characters, count {count}")
 
         # CHECKING IF PASSWORD HAS MET THE THRESHOLD
         if count <= 2:
@@ -110,11 +101,44 @@ def user_password():
             elif try_again == "n":
                 correct_password = False
 
-        elif count == 5:
+        elif count >= 5:
             print("You have selected a very strong password")
             correct_password = False
-        else:
-            print("Try again")
-            correct_password = True
 
     return password
+
+
+def add_to_csv(user_identity, user_pswd):
+    """Adds user id and password to a csv file"""
+    with open("user_data.csv", "a") as f:
+        f.write(str(user_identity) + "," + str(user_pswd) + "\n")
+
+
+def display_csv():
+    """Adds user id and password to a csv file"""
+    with open("user_data.csv", "r") as f:
+        iterable = csv.reader(f)
+        dd_list = list(iterable)
+        for item in dd_list:
+            print(item[0])
+
+
+def change_password():
+    """ Change password in csv and save it a csv"""
+    global user_idt
+    correct = True
+    while correct:
+        user_idt = input("Insert User ID:")
+        with open("user_data.csv", "r") as f:
+            iterable = csv.reader(f)
+            dd_list = list(iterable)
+            for item in dd_list:
+                loop = 0
+                # manufactured loop
+                for row in dd_list:
+                    if user_idt in row:
+                        correct = False
+    return user_idt
+
+
+
