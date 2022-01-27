@@ -132,13 +132,42 @@ def change_password():
         with open("user_data.csv", "r") as f:
             iterable = csv.reader(f)
             dd_list = list(iterable)
+            loop = 0
             for item in dd_list:
-                loop = 0
-                # manufactured loop
-                for row in dd_list:
-                    if user_idt in row:
-                        correct = False
+                if user_idt in item:
+                    loop += 1
+            if loop != 0:
+                print("user id in list")
+                correct = False
+            else:
+                print("User ID not in list."
+                      "\ntry again")
+
     return user_idt
+
+
+def save_to_csv(new_user_id, new_password):
+    tmp = []
+    with open("user_data.csv", "r") as f:
+        iterable = csv.reader(f)
+        dd_list = list(iterable)
+
+        for item in dd_list:
+            if item[0] == new_user_id:
+                new_data = [item[0], new_password]
+                tmp.append(new_data)
+            else:
+                data = [item[0], item[1]]
+                tmp.append(data)
+    with open("user_data.csv", "w") as f:
+        for row in tmp:
+            overwrite_data = row[0] + "," + row[1] + "\n"
+            f.write(overwrite_data)
+
+
+
+
+
 
 
 

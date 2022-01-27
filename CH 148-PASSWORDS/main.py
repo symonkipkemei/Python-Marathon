@@ -20,8 +20,9 @@ def main():
 
         # change password
         elif user_selection == 2:
-            user_id_changed = change_password()
-            user_password()
+            new_user_id = change_password()
+            new_password = user_password()
+            save_to_csv(new_user_id, new_password)
 
         # display all users
         elif user_selection == 3:
