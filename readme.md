@@ -9,21 +9,21 @@ programming.
 
 ## part 1: Learning Python
 
-1.The Basics
-2.If statements
-3.Strings
-4.Maths
-5.For Loop
-6.While Loop
-7.Random
-8.Tuples,List and Dictionaries
-9.More String Manipulation
-10.Numeric Arrays
-11.2D Lists and Dictionaries
-12.Reading and writing with a text file
-13.Reading and writing to a csv file
-14.Sub Programs
-15.Sqlite
+1. The Basics
+2. If statements
+3. Strings
+4. Maths
+5. For Loop
+6. While Loop
+7. Random
+8. Tuples,List and Dictionaries
+9. More String Manipulation
+10. Numeric Arrays
+11. 2D Lists and Dictionaries
+12. Reading and writing with a text file
+13. Reading and writing to a csv file
+14. Sub Programs
+15. Sqlite
 
 ## part 2: Chunky challenges
 1. Shift code
